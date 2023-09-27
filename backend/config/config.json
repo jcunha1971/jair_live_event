@@ -1,0 +1,16 @@
+{
+  "development": {
+    "username": "matheusepapaijair",
+    "password": "putaquepariu1@",
+    "database": "live_jair",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "matheusepapaijair",
+    "password": "putaquepariu1@",
+    "database": "live_jair",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}

@@ -1,0 +1,49 @@
+version: '3'
+services:
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - 6379:6379
+    networks:
+      - network-default
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: matheusepapaijair
+      POSTGRES_PASSWORD: putaquepariu1@
+      POSTGRES_DB: live_jair
+    ports:
+      - "5432:5432"
+    networks:
+      - network-default
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app/
+    networks:
+      - network-default
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./backend:/app/
+    depends_on:
+      - postgres
+    networks:
+      - network-default
+
+networks:
+  network-default:
+    driver: bridge
